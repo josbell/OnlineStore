@@ -1,0 +1,70 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<form>
+				<input class="form-control" type="text" ng-model="search" placeholder="filter by...">
+			</form>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-4" id='orderFormDiv'>
+			<form class="form-horizontal" id="orderForm" ng-submit="create()" >
+				<fieldset>
+					<div id="legend">
+						<legend class="">Add a new order</legend>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Customer</label>
+						<select class="form-control" ng-model='selectedCustomer' ng-options='customer as customer.name for customer in customers'></select>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Product</label>
+						<select class="form-control" ng-model='selectedProduct' ng-options='product as product.name for product in products'></select>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Order Qty</label>
+						<input class="form-control" type="number"  ng-model='selectedQty'>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-success" type="submit">Submit</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="col"></div>
+		<div class="col"></div>
+	</div>
+
+	<div id="orderTable">
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Customer Name</th>
+					<th>Product</th>
+					<th>Order Qty</th>
+					<th>Created Date</th>
+					<th>Actions</th>
+				</tr>
+				<tr ng-repeat='order in orders | filter:search'>
+
+					<td ng-if='!order.editing'>{{order.customer}}</td>
+					<td ng-if='order.editing'>
+						<form ng-submit='update(order)'>
+							<input type="text" ng-model='order.customer'>
+							<input class="btn btn-default" type="submit" style="display: none">
+						</form>
+					</td>
+					<td>{{order.product}}</td>
+					<td>{{order.orderQty}}</td>
+					<td>{{order.createdAt | date }}</td>
+
+					<td>
+						<button type="button" ng-click='order.editing =true'>Edit</button> 
+						<button type="button" ng-click='delete(order._id)'>Remove</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

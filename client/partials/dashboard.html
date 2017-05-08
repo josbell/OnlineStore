@@ -1,0 +1,50 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<form>
+				<input class="form-control" type="text" ng-model="search" placeholder="filter by...">
+			</form>
+			<br>
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-3" id="productDivDashboard" ng-repeat='product in products | filter:search | limitTo: productsLimit'>
+					<figure class="figure productImg">
+						<a href="{{product.imgUrl}}">
+							<img src="{{product.imgUrl}}">
+						</a>
+						<figcaption><h5>{{product.name}} | {{product.qty}} left</h5></figcaption>
+					</figure>
+				</div>
+			</div>
+			<p class="showAll"><a class="showAllLink" ng-click="productsLimit = (productsLimit==4 ? null:4)">{{productsLimit == 4 ? 'more':'less'}}</a></p>
+
+			<div class="row">
+				<div class="col-md-6" style="padding: 2vh">
+					<h4>Recent Orders</h1>
+					<p ng-repeat='order in orders | filter:search | limitTo:ordersLimit'>
+						{{order.customer}} purchased {{order.orderQty}} {{order.product}} on {{order.createdAt | date}}
+					</p>
+					<p class="showAll">
+						<a class="showAllLink" 
+							ng-click="ordersLimit = (ordersLimit==4 ? null:4)">{{ordersLimit == 4 ? 'more':'less'}}
+						</a>
+					</p>
+				</div>
+				
+
+				<div class="col-md-6" style="padding: 2vh">
+					<h4>New Customers</h4>
+					<p ng-repeat='customer in customers | filter:search | limitTo:customersLimit'>
+					{{customer.name}} signed up on {{customer.createdAt | date}}</p>
+					<p class="showAll">
+						<a class="showAllLink" 
+							ng-click="customersLimit = (customersLimit==4 ? null:4)">{{customersLimit == 4 ? 'more':'less'}}
+						</a>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

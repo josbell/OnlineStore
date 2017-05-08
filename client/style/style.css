@@ -1,0 +1,48 @@
+img{
+	max-width: 100%;
+	max-height: 100%
+}
+figure{
+	text-align: center;
+
+}
+
+
+#productDiv{
+	margin-top: 100px;
+}
+
+#productDivDashboard{
+	margin-bottom: 40px;
+	display: block;
+}
+
+
+#orderFormDiv{
+	padding-right: 20vh;
+}
+.productImg{
+	height: 18vh;
+	width: 18vh;
+	display: block;
+	border: 2px solid gray;
+	
+}
+
+
+
+#customerForm{
+	margin:50px 0;
+}
+
+#customerTable{
+	margin-top: 4%;
+}
+
+.showAll{
+	text-align: center;
+}
+
+.showAllLink{
+	cursor: pointer;
+}

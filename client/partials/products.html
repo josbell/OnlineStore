@@ -1,0 +1,72 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<form>
+				<input class="form-control" type="text" ng-model="search" placeholder="filter by...">
+			</form>
+			<br>
+			<form class="form-horizontal" name="productForm" ng-submit='create()'>
+			  <fieldset>
+			    <div id="legend">
+			      <legend class="">Add a new product</legend>
+			    </div>
+			    <div class="control-group" ng-class="{'has-error':productForm.name.$submitted && productForm.name.$invalid}">
+			      <!-- Product name -->
+			      <label class="control-label"  for="name">Name</label>
+			      <div class="controls" >
+			        <input ng-model='inputProduct.name' type="text" id="name" name="name"  class="input-xlarge" minlength="2" required>
+			        <p class="help-block" ng-show="productForm.name.$submitted && productForm.name.$invalid && productForm.name.$error.required">Product name required</p>
+			        <p class="help-block" ng-show="productForm.name.$submitted && productForm.name.$invalid && productForm.name.$error.minlength">Product name must be at least 2 characters</p>
+			      </div>
+			    </div>
+			 
+			    <div class="control-group" ng-class="{'has-error':productForm.imgUrl.$submitted && productForm.imgUrl.$invalid}">
+			      <!-- E-mail -->
+			      <label class="control-label" for="imgUrl">Image Url</label>
+			      <div class="controls">
+			        <input ng-model='inputProduct.imgUrl' type="url" id="imgUrl" name="imgUrl"  class="input-xlarge">
+			        <p class="help-block" ng-show="productForm.imgUrl.$submitted && productForm.imgUrl.$invalid && productForm.imgUrl.$error.url">Improper Url</p>
+			      </div>
+			    </div>
+			 
+			    <div class="control-group">
+			      <!-- Description-->
+			      <label class="control-label" for="description">Description</label>
+			      <div class="controls">
+			        <textarea ng-model='inputProduct.description' type="text" id="description" name="description"  class="input-xlarge"></textarea>
+			      </div>
+			    </div>
+
+			    <div class="control-group" ng-class="{'has-error':productForm.qty.$submitted && productForm.qty.$invalid}">
+			      <!-- Qty-->
+			      <label class="control-label" for="qty">Initial Qty</label>
+			      <div class="controls">
+			        <input ng-model='inputProduct.qty' type="number" id="qty" name="qty"  class="input-xlarge" required></input> 
+			        <p class="help-block" ng-show="productForm.qty.$submitted && productForm.qty.$invalid && productForm.qty.$error.required">Initial Qty required</p>
+			      </div>
+			    </div>
+			
+			 	
+			    <div class="control-group" style="margin-top:10px;">
+			      <!-- Button -->
+			      <div class="controls">
+			        <button type="submit" class="btn btn-success">{{ inputProduct.editing == true ? 'Update' : 'Create' }}</button>
+			      </div>
+				</div>
+			  </fieldset>
+			</form>
+		</div>
+		<div class="col-md-2" id="productDiv" ng-repeat='product in products | filter:search:strict'>
+
+			<figure class="figure productImg">
+				<a href="{{product.imgUrl}}">
+					<img src="{{product.imgUrl}}">
+				</a>
+				<figcaption><h5>{{product.name}} | {{product.qty}} left</h5></figcaption>
+				<button class="btn btn-default" type="button" ng-click='edit(product)'>Edit</button>
+				<button class="btn btn-default" type="button" ng-click='delete(product._id)'>Delete</button>
+			</figure>
+
+		</div>
+	</div>
+</div>
